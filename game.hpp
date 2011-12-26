@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <SDL/SDL.h>
+#include <SDL/SDL_framerate.h>
 
 #include "input.hpp"
 #include "background.hpp"
@@ -13,6 +14,8 @@ class Game
     SDL_Surface* display;
     Input* input;
     Background* background;
+    FPSmanager* fpsmanager;
+    int i;
 
   public:
     Game(SDL_Surface* display);

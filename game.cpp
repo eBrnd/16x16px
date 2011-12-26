@@ -6,13 +6,18 @@ Game::Game(SDL_Surface* display)
   this->input = new Input();
   this->background = new Background(display);
   background->loadFile("background.png");
+
+  fpsmanager = new FPSmanager();
+  SDL_initFramerate(fpsmanager);
+  SDL_setFramerate(fpsmanager, 30);
 }
 
 bool Game::frame()
 {
-  input->read();
-  background->draw(0, 0);
+  SDL_framerateDelay(fpsmanager);
+  background->draw(i++, 0);
   SDL_Flip(display);
+  input->read();
   if(input->escape)
     return false;
   else
