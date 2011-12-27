@@ -7,6 +7,7 @@
 
 #include "input.hpp"
 #include "background.hpp"
+#include "foreground.hpp"
 
 class Game
 {
@@ -14,6 +15,7 @@ class Game
     SDL_Surface* display;
     Input* input;
     Background* background;
+    Foreground* foreground;
     FPSmanager* fpsmanager;
     int i;
 

@@ -22,7 +22,7 @@ bool Background::loadFile(std::string filename)
     return false;
 }
 
-void Background::draw(int x, int y)
+void Background::draw(int x, int y) // TODO make bg wrap around
 {
   SDL_Rect bg_pos = { x, y, 320, 240 }; // TODO make width + height variable (window size)
   SDL_Rect dst_pos = { 0, 0, 320, 240 };
