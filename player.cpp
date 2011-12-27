@@ -48,8 +48,8 @@ void Player::input(Uint8 direction)
   if(vx < -64)
     vx = -64;
   // test for collision
-  if(foreground->collision((px+vx)/16, py/16))
-    vx = 0;
+  while(foreground->collision((px+vx)/16, py/16))
+    vx--;
   px += vx;
 
   if(direction & 0x01 && jumping < 4)
