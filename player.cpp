@@ -6,6 +6,7 @@ Player::Player(SDL_Surface* display, Foreground* foreground)
   this->foreground = foreground;
   px = py = 50*16;
   vx = vy = jumping = 0;
+  faceRight = true;
   sprite = NULL;
 }
 
@@ -35,36 +36,37 @@ void Player::draw(int x, int y)
 
 void Player::input(Uint8 direction)
 {
-  control = direction;
-  if(control & 0x01 && jumping < 4) // jump
-  {
-    vy -= 12;
-    jumping++;
-  }
-  if(control & 0x04) // right
-  {
-    vx = -64;
-  } else if(control & 0x08) // right
-  {
-    vx = 64;
-  } else {
+  // moving left and right
+  if(direction & 0x04)
+    vx -= 16;
+  if(direction & 0x08)
+    vx += 16;
+  if(!direction)
     vx = 0;
+  if(vx > 64)
+    vx = 64;
+  if(vx < -64)
+    vx = -64;
+  // test for collision
+  if(foreground->collision((px+vx)/16, py/16))
+    vx = 0;
+  px += vx;
+
+  if(direction & 0x01 && jumping < 4)
+  {
+    jumping++;
+    vy -= 48;
   }
 }
 
 void Player::physics()
 {
-  // Gravity
-  if(vy < 64)
-    vy+=2;
-  if(vy > 0 && foreground->collision(px/16, py/16)) // touching the ground
+  // gravity
+  vy = vy >= 64 ? 64 : vy + 16;
+  while(foreground->collision(px/16, (py+vy)/16))
   {
-    vy = 0;
     jumping = 0;
+    vy--;
   }
   py += vy;
-  if(foreground->collision(px/16, (py-1)/16)) // eject sprite
-    py-=16;
-
-  px += vx;
 }

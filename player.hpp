@@ -16,6 +16,7 @@ class Player
     int px, py;
     int vx, vy;
     int jumping;
+    bool faceRight;
   public:
     Player(SDL_Surface* display, Foreground* foreground);
     ~Player();

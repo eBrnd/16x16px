@@ -87,5 +87,6 @@ Uint8 Foreground::collision(int x, int y)
   if(map[width * ((m_y+1) % height) + ((m_x+1) % width)] != 0)
     result |= 0x08;
 
+  std::cout << "Collision: A " << (result & 0x01) << " B " << (result & 0x02) << " C " << (result & 0x04) << " D " << (result & 0x08) << std::endl;
   return result;
 }
