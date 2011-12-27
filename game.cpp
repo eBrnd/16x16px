@@ -24,10 +24,11 @@ bool Game::frame()
   SDL_framerateDelay(fpsmanager);
   background->draw(i, 0);
   foreground->draw(i, 0);
+  player->input(input->direction);
+  player->physics();
   player->draw(i, 0);
   SDL_Flip(display);
   input->read();
-  player->input(input->direction);
   if(input->escape)
     return false;
   else

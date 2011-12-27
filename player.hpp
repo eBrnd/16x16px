@@ -14,12 +14,16 @@ class Player
     SDL_Surface* sprite;
     Foreground* foreground;
     int px, py;
+    int vx, vy;
+    int jumping;
   public:
     Player(SDL_Surface* display, Foreground* foreground);
     ~Player();
+    Uint8 control;
     bool loadSprite(std::string filename);
     void draw(int x, int y);
     void input(Uint8 direction);
+    void physics();
 };
 
 #endif

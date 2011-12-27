@@ -4,7 +4,8 @@ Player::Player(SDL_Surface* display, Foreground* foreground)
 {
   this->display = display;
   this->foreground = foreground;
-  px = py = 50;
+  px = py = 50*16;
+  vx = vy = jumping = 0;
   sprite = NULL;
 }
 
@@ -28,20 +29,39 @@ void Player::draw(int x, int y)
 {
   //TODO animation
   SDL_Rect src = { 0, 0, 16, 16 };
-  SDL_Rect dst = { px - x, py - y, 16, 16 };
+  SDL_Rect dst = { px/16 - x, py/16 - y, 16, 16 };
   SDL_BlitSurface(sprite, &src, display, &dst);
-
-  foreground->collision(px, py); // TODO this is not the right place to to this - make somethig like a game logic...
 }
 
 void Player::input(Uint8 direction)
 {
-  if(direction & 0x01)
-    py-=1;
-  if(direction & 0x02)
-    py+=1;
-  if(direction & 0x04)
-    px-=1;
-  if(direction & 0x08)
-    px+=1;
+  control = direction;
+  if(control & 0x01 && jumping < 4) // jump
+  {
+    vy -= 12;
+    jumping++;
+  }
+  if(control & 0x04) // right
+  {
+    vx = -64;
+  } else if(control & 0x08) // right
+  {
+    vx = 64;
+  } else {
+    vx = 0;
+  }
+}
+
+void Player::physics()
+{
+  // Gravity
+  if(vy < 64)
+    vy+=2;
+  if(vy > 0 && foreground->collision(px/16, py/16)) // touching the ground
+  {
+    vy = 0;
+    jumping = 0;
+  }
+  py += vy;
+  px += vx;
 }
