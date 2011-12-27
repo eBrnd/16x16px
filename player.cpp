@@ -63,5 +63,8 @@ void Player::physics()
     jumping = 0;
   }
   py += vy;
+  if(foreground->collision(px/16, (py-1)/16)) // eject sprite
+    py-=16;
+
   px += vx;
 }
