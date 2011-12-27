@@ -60,12 +60,12 @@ void Foreground::draw(int x, int y)
   int st_x = x / 16;
   int st_y = y / 16;
 
-  for(int t_y = st_y; t_y < st_y + 12; t_y++)
-    for(int t_x = st_x; t_x < st_x + 20; t_x++)
+  for(int t_y = st_y; t_y <= st_y + 12; t_y++)
+    for(int t_x = st_x; t_x <= st_x + 20; t_x++)
     {
-      if((int)map[width * t_y + t_x] != 0)
+      if((int)map[width * (t_y % height) + (t_x % width)] != 0)
       {
-        SDL_Rect src = { (map[width * t_y + t_x] - 1) * 16, 0, 16, 16 };
+        SDL_Rect src = { (map[width * (t_y % height) + (t_x % width)] - 1) * 16, 0, 16, 16 };
         SDL_Rect dst = { t_x * 16 - x, t_y * 16, 16, 16 };
         SDL_BlitSurface(tiles, &src, display, &dst);
       }
