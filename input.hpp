@@ -13,6 +13,7 @@ class Input
     void read();
 
     bool escape;
+    Uint8 direction;
 };
 
 #endif

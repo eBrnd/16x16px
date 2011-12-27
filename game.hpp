@@ -8,6 +8,7 @@
 #include "input.hpp"
 #include "background.hpp"
 #include "foreground.hpp"
+#include "player.hpp"
 
 class Game
 {
@@ -16,6 +17,7 @@ class Game
     Input* input;
     Background* background;
     Foreground* foreground;
+    Player* player;
     FPSmanager* fpsmanager;
     int i;
 
