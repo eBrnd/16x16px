@@ -30,7 +30,7 @@ void Background::draw(int x, int y)
   if((x % bg_surf->w) + 320 > bg_surf->w) // fill in the rest when we're scrolling "between" instances of the bg
   { // TODO make this work for vertical scrolling as well
     SDL_Rect bg_fill_pos = { 0, y % bg_surf->h, 320, 240 };
-    SDL_Rect fill_dst = { bg_surf->w - x, 0, 320, 240 };
+    SDL_Rect fill_dst = { bg_surf->w - (x % bg_surf->w), 0, 320, 240 };
     SDL_BlitSurface(bg_surf, &bg_fill_pos, display, &fill_dst);
   }
 }

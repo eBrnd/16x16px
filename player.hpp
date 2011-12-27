@@ -25,6 +25,7 @@ class Player
     void draw(int x, int y);
     void input(Uint8 direction);
     void physics();
+    int getX();
 };
 
 #endif

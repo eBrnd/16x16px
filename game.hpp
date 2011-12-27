@@ -19,7 +19,6 @@ class Game
     Foreground* foreground;
     Player* player;
     FPSmanager* fpsmanager;
-    int i;
 
   public:
     Game(SDL_Surface* display);

@@ -15,12 +15,11 @@ Game::Game(SDL_Surface* display)
   fpsmanager = new FPSmanager();
   SDL_initFramerate(fpsmanager);
   SDL_setFramerate(fpsmanager, 30);
-
-  i = 0;
 }
 
 bool Game::frame()
 {
+  int i = player->getX() - 160;
   SDL_framerateDelay(fpsmanager);
   background->draw(i, 0);
   foreground->draw(i, 0);

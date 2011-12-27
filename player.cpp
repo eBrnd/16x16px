@@ -81,3 +81,8 @@ void Player::physics()
   }
   py += vy;
 }
+
+int Player::getX()
+{
+  return px / 16;
+}
