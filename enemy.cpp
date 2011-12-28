@@ -7,7 +7,8 @@ Enemy::Enemy(SDL_Surface* display, Foreground* foreground)
   this->sprite = NULL;
   px = 0;
   py = 0;
-  vx = vy = 0;
+  vy = 0;
+  vx = 16;
   width = height = 0;
 }
 
@@ -49,11 +50,16 @@ void Enemy::update()
     }
   }
   py += vy;
+
+  // horizontal movement
+  if(foreground->collision((px+vx)/16, py/16, width, height))
+    vx = -vx;
+  px += vx;
 }
 
 void Enemy::draw(int x, int y)
 {
-  SDL_Rect src = { 0, 0, 16, 16 };
+  SDL_Rect src = { vx > 0 ? 16 : 0, 0, 16, 16 };
   SDL_Rect dst = { px/16 - x, py/16 - y, 16, 16 };
   SDL_BlitSurface(sprite, &src, display, &dst);
 }
