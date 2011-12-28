@@ -16,8 +16,10 @@ Player::~Player()
     SDL_FreeSurface(sprite);
 }
 
-bool Player::loadSprite(std::string filename)
+bool Player::loadSprite(std::string filename, int width, int height) // TODO autodetect witdh / height
 {
+  this->width = width;
+  this->height = height;
   if(sprite != NULL)
     SDL_FreeSurface(sprite);
   if((sprite = IMG_Load(filename.c_str())) != NULL)
@@ -54,7 +56,7 @@ void Player::input(Uint8 direction)
   if(vx < -64)
     vx = -64;
   // test for collision
-  while(foreground->collision((px+vx)/16, py/16))
+  while(foreground->collision((px+vx)/16, py/16, width, height))
     faceRight ? vx-- : vx++;
   px += vx;
 
@@ -69,7 +71,7 @@ void Player::physics()
 {
   // gravity
   vy = vy >= 64 ? 64 : vy + 16;
-  while(foreground->collision(px/16, (py+vy)/16))
+  while(foreground->collision(px/16, (py+vy)/16, width, height))
   {
     if(vy > 0)
     {

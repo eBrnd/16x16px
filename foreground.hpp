@@ -21,7 +21,7 @@ class Foreground
     bool loadTiles(std::string filename);
     bool loadMap(std::string filename);
     void draw(int x, int y);
-    Uint8 collision(int x, int y);
+    Uint8 collision(int x, int y, int swidth, int sheight);
 };
 
 #endif
