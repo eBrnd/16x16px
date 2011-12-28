@@ -11,6 +11,8 @@ Game::Game(SDL_Surface* display)
   foreground->loadMap("map");
   this->player = new Player(display, foreground);
   player->loadSprite("player.png", 10, 13);
+  this->enemy = new Enemy(display);
+  enemy->loadSprite("enemy.png", 9, 10);
 
   fpsmanager = new FPSmanager();
   SDL_initFramerate(fpsmanager);
@@ -26,6 +28,7 @@ bool Game::frame()
   player->input(input->direction);
   player->physics();
   player->draw(i, 0);
+  enemy->draw(i, 0);
   SDL_Flip(display);
   input->read();
   if(input->escape)
