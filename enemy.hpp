@@ -17,6 +17,7 @@ class Enemy
     int px, py;
     int vx, vy;
     int width, height;
+    int animation_time;
   public:
     Enemy(SDL_Surface* display, Foreground* foreground);
     ~Enemy();

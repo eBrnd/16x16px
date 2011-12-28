@@ -10,6 +10,7 @@ Enemy::Enemy(SDL_Surface* display, Foreground* foreground)
   vy = 0;
   vx = 16;
   width = height = 0;
+  animation_time = 0;
 }
 
 Enemy::~Enemy()
@@ -59,7 +60,9 @@ void Enemy::update()
 
 void Enemy::draw(int x, int y)
 {
-  SDL_Rect src = { vx > 0 ? 16 : 0, 0, 16, 16 };
+  if(animation_time++ > 15)
+    animation_time = 0;
+  SDL_Rect src = { (animation_time > 7 ? 16 : 0) + (vx > 0 ? 32 : 0), 0, 16, 16 };
   SDL_Rect dst = { px/16 - x, py/16 - y, 16, 16 };
   SDL_BlitSurface(sprite, &src, display, &dst);
 }
