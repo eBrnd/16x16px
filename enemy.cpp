@@ -35,7 +35,6 @@ void Enemy::setMapPosition(int x, int y)
 
 void Enemy::draw(int x, int y)
 {
-  std::cout << "drawing - " << px/16 - x << ":" << py/16 - y << std::endl;
   SDL_Rect src = { 0, 0, 16, 16 };
   SDL_Rect dst = { px/16 - x, py/16 - y, 16, 16 };
   SDL_BlitSurface(sprite, &src, display, &dst);
