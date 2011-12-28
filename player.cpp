@@ -31,7 +31,9 @@ bool Player::loadSprite(std::string filename, int width, int height) // TODO aut
 void Player::draw(int x, int y)
 {
   //TODO animation
-  SDL_Rect src = { 0, 0, 16, 16 };
+  animation_time = (animation_time + vx) % 512;
+  int animation_phase = animation_time > 0 ? animation_time / 171 : -animation_time / 171;
+  SDL_Rect src = { jumping ? 48 : animation_phase * 16, 0, 16, 16 };
   SDL_Rect dst = { px/16 - x, py/16 - y, 16, 16 };
   SDL_BlitSurface(sprite, &src, display, &dst);
 }

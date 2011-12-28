@@ -18,6 +18,7 @@ class Player
     int vx, vy;
     int jumping;
     bool faceRight;
+    int animation_time;
   public:
     Player(SDL_Surface* display, Foreground* foreground);
     ~Player();
