@@ -22,7 +22,7 @@ EnemyList::~EnemyList()
 
 void EnemyList::add(int map_x, int map_y)
 {
-  Enemy* the_enemy = new Enemy(display);
+  Enemy* the_enemy = new Enemy(display, foreground);
   the_enemy->loadSprite("enemy.png", 9, 10);
   the_enemy->setMapPosition(map_x, map_y);
   enemies->push_back(the_enemy);
@@ -31,7 +31,11 @@ void EnemyList::add(int map_x, int map_y)
 void EnemyList::draw(int x, int y)
 {
   for(std::vector<Enemy*>::iterator it = enemies->begin(); it < enemies->end(); it++)
-  {
     (*it)->draw(x,y);
-  }
+}
+
+void EnemyList::update()
+{
+  for(std::vector<Enemy*>::iterator it = enemies->begin(); it < enemies->end(); it++)
+    (*it)->update();
 }

@@ -15,12 +15,14 @@ class Enemy
     SDL_Surface* sprite;
     Foreground* foreground;
     int px, py;
+    int vx, vy;
     int width, height;
   public:
-    Enemy(SDL_Surface* display);
+    Enemy(SDL_Surface* display, Foreground* foreground);
     ~Enemy();
     bool loadSprite(std::string filename, int width, int height);
     void setMapPosition(int x, int y);
+    void update();
     void draw(int x, int y);
 };
 

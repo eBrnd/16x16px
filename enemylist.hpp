@@ -18,6 +18,7 @@ class EnemyList
     ~EnemyList();
     void add(int map_x, int map_y);
     void draw(int x, int y);
+    void update();
     //TODO clear
 };
 

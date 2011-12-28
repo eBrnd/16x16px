@@ -1,11 +1,13 @@
 #include "enemy.hpp"
 
-Enemy::Enemy(SDL_Surface* display)
+Enemy::Enemy(SDL_Surface* display, Foreground* foreground)
 {
   this->display = display;
+  this->foreground = foreground;
   this->sprite = NULL;
   px = 0;
   py = 0;
+  vx = vy = 0;
   width = height = 0;
 }
 
@@ -31,6 +33,22 @@ void Enemy::setMapPosition(int x, int y)
 {
   px = x * 256;
   py = y * 256;
+}
+
+void Enemy::update()
+{
+  // gravity
+  vy = vy >= 64 ? 64 : vy + 16;
+  while(foreground->collision(px/16, (py+vy)/16, width, height))
+  {
+    if(vy > 0)
+    {
+      vy--;
+    } else {
+      vy = 8;
+    }
+  }
+  py += vy;
 }
 
 void Enemy::draw(int x, int y)

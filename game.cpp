@@ -24,6 +24,7 @@ bool Game::frame()
   SDL_framerateDelay(fpsmanager);
   background->draw(i, 0);
   foreground->draw(i, 0);
+  enemylist->update();
   enemylist->draw(i, 0);
   player->input(input->direction);
   player->physics();
