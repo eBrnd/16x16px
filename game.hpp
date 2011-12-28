@@ -9,7 +9,7 @@
 #include "background.hpp"
 #include "foreground.hpp"
 #include "player.hpp"
-#include "enemy.hpp"
+#include "enemylist.hpp"
 
 class Game
 {
@@ -19,7 +19,7 @@ class Game
     Background* background;
     Foreground* foreground;
     Player* player;
-    Enemy* enemy;
+    EnemyList* enemylist;
     FPSmanager* fpsmanager;
 
   public:

@@ -4,8 +4,8 @@ Enemy::Enemy(SDL_Surface* display)
 {
   this->display = display;
   this->sprite = NULL;
-  px = 4000;
-  py = 1500;
+  px = 0;
+  py = 0;
   width = height = 0;
 }
 
@@ -27,9 +27,15 @@ bool Enemy::loadSprite(std::string filename, int width, int height)
     return false;
 }
 
+void Enemy::setMapPosition(int x, int y)
+{
+  px = x * 256;
+  py = y * 256;
+}
+
 void Enemy::draw(int x, int y)
 {
-  //TODO animation
+  std::cout << "drawing - " << px/16 - x << ":" << py/16 - y << std::endl;
   SDL_Rect src = { 0, 0, 16, 16 };
   SDL_Rect dst = { px/16 - x, py/16 - y, 16, 16 };
   SDL_BlitSurface(sprite, &src, display, &dst);

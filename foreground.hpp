@@ -7,6 +7,8 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+#include "enemylist.hpp"
+
 class Foreground
 {
   private:
@@ -14,9 +16,10 @@ class Foreground
     SDL_Surface* tiles;
     Uint8* map;
     int width, height;
+    EnemyList* enemylist;
 
   public:
-    Foreground(SDL_Surface* display);
+    Foreground(SDL_Surface* display, EnemyList* enemylist);
     ~Foreground();
     bool loadTiles(std::string filename);
     bool loadMap(std::string filename);
