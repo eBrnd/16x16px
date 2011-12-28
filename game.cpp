@@ -6,11 +6,11 @@ Game::Game(SDL_Surface* display)
   this->input = new Input();
   this->background = new Background(display);
   background->loadFile("background.png");
-  this->enemylist = new EnemyList(display);
-  this->foreground = new Foreground(display, enemylist);
+  this->foreground = new Foreground(display);
   foreground->loadTiles("tiles.png");
   foreground->loadMap("map");
   this->player = new Player(display, foreground);
+  this->enemylist = new EnemyList(display, foreground);
   player->loadSprite("player.png", 10, 13);
 
   fpsmanager = new FPSmanager();

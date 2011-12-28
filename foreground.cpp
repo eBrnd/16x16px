@@ -1,9 +1,8 @@
 #include "foreground.hpp"
 
-Foreground::Foreground(SDL_Surface* display, EnemyList* enemylist)
+Foreground::Foreground(SDL_Surface* display)
 {
   this->display = display;
-  this->enemylist = enemylist;
   this->tiles = NULL;
   this->map = NULL;
   width = height = 0;
@@ -42,18 +41,19 @@ bool Foreground::loadMap(std::string filename)
     file >> height;
 
     map = (Uint8*)malloc(width * height);
+    enemymap = (Uint8*)malloc(width * height);
 
     for(int i = 0; i < width * height; i++)
     {
+      // since we aren't sure every entry in the enemymap is written, let's clear ist first
+      enemymap[i] = 0;
+
       int val;
       file >> val;
       if(val < 256)
         map[i] = (Uint8)val;
       else if(val < 512)
-      {
-        std::cout << "Adding enemy -- x: " << i % width << " y: " << i / width << std::endl;
-        enemylist->add(i % width, i / width);
-      }
+        enemymap[i] = (Uint8)(val - 255);
     }
     file.close();
     return true;
@@ -94,3 +94,7 @@ Uint8 Foreground::collision(int x, int y, int swidth, int sheight)
 
   return result;
 }
+
+int Foreground::getWidth() { return width; }
+int Foreground::getHeight() { return height; }
+Uint8* Foreground::getEnemyMap() { return enemymap; }

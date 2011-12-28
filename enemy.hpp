@@ -6,11 +6,14 @@
 #include "SDL/SDL.h"
 #include "SDL/SDL_image.h"
 
+#include "foreground.hpp"
+
 class Enemy
 {
   private:
     SDL_Surface* display;
     SDL_Surface* sprite;
+    Foreground* foreground;
     int px, py;
     int width, height;
   public:

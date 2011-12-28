@@ -1,9 +1,18 @@
 #include "enemylist.hpp"
 
-EnemyList::EnemyList(SDL_Surface* display)
+EnemyList::EnemyList(SDL_Surface* display, Foreground* foreground)
 {
   this->display = display;
+  this->foreground = foreground;
   this->enemies = new std::vector<Enemy*>();
+
+  // now, fill the map
+  int mw = foreground->getWidth();
+  int mh = foreground->getHeight();
+  Uint8* em = foreground->getEnemyMap();
+  for(int i = 0; i < mw * mh; i++)
+    if(em[i])
+      add(i % mw, i / mw);
 }
 
 EnemyList::~EnemyList()
