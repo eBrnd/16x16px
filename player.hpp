@@ -20,6 +20,7 @@ class Player
     int jumping;
     bool faceRight;
     int animation_time;
+    int death_animation;
   public:
     Player(SDL_Surface* display, Foreground* foreground);
     ~Player();
