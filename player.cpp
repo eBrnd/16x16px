@@ -66,14 +66,19 @@ void Player::input(Uint8 direction)
     if(vx < -64)
       vx = -64;
     // test for collision
-    while(foreground->collision((px+vx)/16, py/16, width, height))
-      faceRight ? vx-- : vx++;
-    px += vx;
-
-    if(direction & 0x01 && jumping < 4)
+    if(foreground->collision((px+vx)/16, py/16, width, height) > 15)
+      death_animation = 100;
+    else
     {
-      jumping++;
-      vy -= 48;
+      while(foreground->collision((px+vx)/16, py/16, width, height))
+        faceRight ? vx-- : vx++;
+      px += vx;
+
+      if(direction & 0x01 && jumping < 4)
+      {
+        jumping++;
+        vy -= 48;
+      }
     }
   }
 }
@@ -84,17 +89,22 @@ void Player::physics()
   {
     // gravity
     vy = vy >= 64 ? 64 : vy + 16;
-    while(foreground->collision(px/16, (py+vy)/16, width, height))
+    if(foreground->collision(px/16, (py+vy)/16, width, height) > 15)
+      death_animation = 100;
+    else
     {
-      if(vy > 0)
+      while(foreground->collision(px/16, (py+vy)/16, width, height))
       {
-        jumping = 0;
-        vy--;
-      } else {
-        vy = 8;
+        if(vy > 0)
+        {
+          jumping = 0;
+          vy--;
+        } else {
+          vy = 8;
+        }
       }
+      py += vy;
     }
-    py += vy;
   }
 }
 

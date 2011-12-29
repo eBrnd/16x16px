@@ -83,14 +83,23 @@ Uint8 Foreground::collision(int x, int y, int swidth, int sheight)
 {
   Uint8 result = 0;
 
-  if(map[width * ((y/16) % height) + ((x/16) % width)] != 0)
+  if(map[width * ((y/16) % height) + ((x/16) % width)] == 1)
     result |= 0x01;
-  if(map[width * (((y+sheight)/16) % height) + ((x/16) % width)] != 0)
+  if(map[width * (((y+sheight)/16) % height) + ((x/16) % width)] == 1)
     result |= 0x02;
-  if(map[width * ((y/16) % height) + (((x+swidth)/16) % width)] != 0)
+  if(map[width * ((y/16) % height) + (((x+swidth)/16) % width)] == 1)
     result |= 0x04;
-  if(map[width * (((y+sheight)/16) % height) + (((x+swidth)/16) % width)] != 0)
+  if(map[width * (((y+sheight)/16) % height) + (((x+swidth)/16) % width)] == 1)
     result |= 0x08;
+
+  if(map[width * ((y/16) % height) + ((x/16) % width)] == 2)
+    result |= 0x10;
+  if(map[width * (((y+sheight)/16) % height) + ((x/16) % width)] == 2)
+    result |= 0x20;
+  if(map[width * ((y/16) % height) + (((x+swidth)/16) % width)] == 2)
+    result |= 0x40;
+  if(map[width * (((y+sheight)/16) % height) + (((x+swidth)/16) % width)] == 2)
+    result |= 0x80;
 
   return result;
 }
