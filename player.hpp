@@ -6,6 +6,7 @@
 #include <string>
 
 #include "foreground.hpp"
+#include "box.hpp"
 
 class Player
 {
@@ -28,6 +29,8 @@ class Player
     void input(Uint8 direction);
     void physics();
     int getX();
+    Box getBbox();
+    int hit();
 };
 
 #endif

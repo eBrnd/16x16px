@@ -66,3 +66,8 @@ void Enemy::draw(int x, int y)
   SDL_Rect dst = { px/16 - x, py/16 - y, 16, 16 };
   SDL_BlitSurface(sprite, &src, display, &dst);
 }
+
+Box Enemy::getBbox()
+{
+  return Box(px / 16, px / 16 + width, py / 16, py / 16 + height);
+}

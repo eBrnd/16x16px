@@ -7,6 +7,7 @@
 #include "SDL/SDL_image.h"
 
 #include "foreground.hpp"
+#include "box.hpp"
 
 class Enemy
 {
@@ -25,6 +26,7 @@ class Enemy
     void setMapPosition(int x, int y);
     void update();
     void draw(int x, int y);
+    Box getBbox();
 };
 
 #endif

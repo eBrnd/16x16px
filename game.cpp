@@ -10,8 +10,8 @@ Game::Game(SDL_Surface* display)
   foreground->loadTiles("tiles.png");
   foreground->loadMap("map");
   this->player = new Player(display, foreground);
-  this->enemylist = new EnemyList(display, foreground);
   player->loadSprite("player.png", 10, 13);
+  this->enemylist = new EnemyList(display, foreground, player);
 
   fpsmanager = new FPSmanager();
   SDL_initFramerate(fpsmanager);

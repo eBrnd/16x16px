@@ -90,3 +90,16 @@ int Player::getX()
 {
   return px / 16;
 }
+
+Box Player::getBbox()
+{
+  return Box(px / 16, px / 16 + width, py / 16, py / 16 + height);
+}
+
+int Player::hit()
+{
+  if(vy > 0)
+    return -1; // player hit enemy
+  else
+    return 0; // enemy hit player -- TODO
+}

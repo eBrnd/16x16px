@@ -1,9 +1,10 @@
 #include "enemylist.hpp"
 
-EnemyList::EnemyList(SDL_Surface* display, Foreground* foreground)
+EnemyList::EnemyList(SDL_Surface* display, Foreground* foreground, Player* player)
 {
   this->display = display;
   this->foreground = foreground;
+  this->player = player;
   this->enemies = new std::vector<Enemy*>();
 
   // now, fill the map
@@ -17,7 +18,9 @@ EnemyList::EnemyList(SDL_Surface* display, Foreground* foreground)
 
 EnemyList::~EnemyList()
 {
-  delete(enemies); // TODO delete ALL the enemies
+  for(std::vector<Enemy*>::iterator it = enemies->begin(); it < enemies->end(); it++)
+    delete(*it);
+  delete(enemies);
 }
 
 void EnemyList::add(int map_x, int map_y)
@@ -36,6 +39,12 @@ void EnemyList::draw(int x, int y)
 
 void EnemyList::update()
 {
+  Box playerbbox = player->getBbox();
   for(std::vector<Enemy*>::iterator it = enemies->begin(); it < enemies->end(); it++)
+  {
     (*it)->update();
+    if(playerbbox.collision((*it)->getBbox()))
+      if(player->hit() < 0)
+        enemies->erase(it); // TODO death animation
+  }
 }
