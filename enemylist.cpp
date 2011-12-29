@@ -42,9 +42,23 @@ void EnemyList::update()
   Box playerbbox = player->getBbox();
   for(std::vector<Enemy*>::iterator it = enemies->begin(); it < enemies->end(); it++)
   {
-    (*it)->update();
-    if(playerbbox.collision((*it)->getBbox()))
-      if(player->hit() < 0)
-        enemies->erase(it); // TODO death animation
+    switch((*it)->update())
+    {
+      case 0: // normal update
+        if(playerbbox.collision((*it)->getBbox()))
+        {
+          if(player->hit() < 0)
+            (*it)->hit();
+        }
+        break;
+      case 1: // dead, but not despawned yet
+        break;
+      case -1: // dead, and wants to be deleted
+        delete(*it);
+        enemies->erase(it);
+        break;
+      default:
+        break;
+    }
   }
 }
